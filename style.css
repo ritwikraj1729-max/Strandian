@@ -1,0 +1,707 @@
+/* ============================================================
+   STRANDIAN — style.css (with Task Complete card + confetti)
+   ============================================================ */
+
+/* ---------- GLOBAL RESET & BASE ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #0d0f14;
+  --bg-card: #181c22;
+  --bg-card-hover: #1f242b;
+  --border-subtle: #2a3038;
+  --text-primary: #eef2f5;
+  --text-secondary: #a8b2c0;
+  --accent: #6c8cff;
+  --accent-glow: rgba(108, 140, 255, 0.25);
+  --gold: #fbbf24;
+  --gold-glow: rgba(251, 191, 36, 0.4);
+  --danger: #ff6b6b;
+  --success: #51cf66;
+  --radius: 16px;
+  --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.6);
+  --transition-smooth: 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.5;
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ---------- HEADER ---------- */
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  user-select: none;
+}
+
+.app-header h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #eef2f5 0%, #6c8cff 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(108, 140, 255, 0.15);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
+  margin-top: 0.2rem;
+  font-weight: 400;
+  border-top: 1px solid var(--border-subtle);
+  display: inline-block;
+  padding-top: 0.3rem;
+}
+
+/* ---------- DASHBOARD GRID ---------- */
+.dashboard {
+  max-width: 1440px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+/* ---------- CARDS ---------- */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.2rem 1rem 1rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-subtle);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth),
+    border-color var(--transition-smooth), opacity 0.2s;
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: grab;
+  user-select: none;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.7);
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.card.dragging {
+  opacity: 0.4;
+  transform: scale(0.96);
+  cursor: grabbing;
+}
+
+.card.drag-over {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent), 0 18px 35px rgba(0, 0, 0, 0.7);
+  background: var(--bg-card-hover);
+  transform: scale(1.02);
+}
+
+.card h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.4rem;
+  padding-right: 1.8rem;
+}
+
+/* ---- Drag handle ---- */
+.drag-handle {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  opacity: 0.25;
+  transition: opacity var(--transition-smooth);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.card:hover .drag-handle {
+  opacity: 0.7;
+}
+
+/* ---------- CARD 1 — TASK ---------- */
+.card-task input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+  outline: none;
+  user-select: text;
+}
+
+.card-task input::placeholder {
+  color: var(--text-secondary);
+  font-weight: 300;
+  letter-spacing: 0.2px;
+}
+
+.card-task input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ---------- CARD 2 — TIMER ---------- */
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.preset-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.6rem;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  font-weight: 500;
+  flex: 1 0 auto;
+}
+
+.preset-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: scale(1.03);
+}
+
+.preset-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.timer-display {
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding: 0.3rem 0;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  transition: color 0.3s;
+}
+
+.timer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: center;
+}
+
+.ctrl-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.35rem 0.7rem;
+  border-radius: 30px;
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  font-weight: 500;
+  flex: 1 0 auto;
+  min-width: 55px;
+}
+
+.ctrl-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.ctrl-btn:active {
+  transform: scale(0.94);
+}
+
+.ctrl-btn#btnStart {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.ctrl-btn#btnStart:hover {
+  background: #5a7ae0;
+}
+
+.ctrl-btn#btnReset {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.ctrl-btn#btnReset:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.session-complete {
+  text-align: center;
+  margin-top: 0.4rem;
+  font-weight: 600;
+  color: var(--success);
+  background: rgba(81, 207, 102, 0.1);
+  padding: 0.3rem;
+  border-radius: 30px;
+  border: 1px solid var(--success);
+  transition: opacity 0.4s, transform 0.3s;
+  font-size: 0.8rem;
+}
+
+.session-complete.hidden {
+  display: none;
+}
+
+.card-timer.glow {
+  box-shadow: 0 0 30px rgba(81, 207, 102, 0.25), 0 0 60px rgba(81, 207, 102, 0.08);
+  border-color: var(--success);
+  transition: box-shadow 0.5s;
+}
+
+/* ---------- CARD 3 — IMAGE UPLOAD ---------- */
+.upload-area {
+  position: relative;
+  border: 2px dashed var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-primary);
+  min-height: 140px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition-smooth), background var(--transition-smooth);
+  overflow: hidden;
+}
+
+.upload-area.dragover {
+  border-color: var(--accent);
+  background: rgba(108, 140, 255, 0.05);
+}
+
+.upload-placeholder {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text-secondary);
+}
+
+.upload-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.upload-placeholder p {
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  font-size: 0.85rem;
+}
+
+.upload-hint {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.upload-preview {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0.3rem;
+}
+
+.upload-preview.show {
+  display: flex;
+  animation: fadeIn 0.4s ease;
+}
+
+.upload-preview img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+}
+
+.upload-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.upload-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.2rem 0.7rem;
+  border-radius: 30px;
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+}
+
+.upload-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.upload-btn.remove-btn:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+#fileInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- CARD 4 — TASK COMPLETE ---------- */
+.card-complete {
+  position: relative;
+  overflow: visible;
+}
+
+.complete-btn {
+  width: 100%;
+  padding: 1.2rem 1rem;
+  background: linear-gradient(135deg, #2a3038, #1f242b);
+  border: 2px solid var(--border-subtle);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex: 1;
+  min-height: 80px;
+  letter-spacing: 0.5px;
+}
+
+.complete-btn:hover {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, #2a3038, #3a3540);
+  transform: scale(1.01);
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.complete-btn:active {
+  transform: scale(0.97);
+}
+
+.complete-btn .btn-icon {
+  font-size: 1.6rem;
+}
+
+.complete-btn .btn-text {
+  transition: opacity 0.3s;
+}
+
+.complete-btn.celebrating {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a2e;
+  box-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(251, 191, 36, 0.15);
+  animation: pulseGold 1.2s ease-in-out;
+}
+
+.complete-btn.celebrating .btn-icon {
+  animation: bounceStar 0.8s ease;
+}
+
+.complete-message {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-top: 0.6rem;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.complete-message.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---- Confetti particles ---- */
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 10;
+}
+
+.confetti-particle {
+  position: absolute;
+  font-size: 1.6rem;
+  animation: confettiBurst 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes confettiBurst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0.2) rotate(720deg);
+  }
+}
+
+@keyframes pulseGold {
+  0% {
+    box-shadow: 0 0 20px var(--gold-glow);
+  }
+  50% {
+    box-shadow: 0 0 60px var(--gold-glow), 0 0 100px rgba(251, 191, 36, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 20px var(--gold-glow);
+  }
+}
+
+@keyframes bounceStar {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.6) rotate(-10deg);
+  }
+  60% {
+    transform: scale(0.9) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ---------- CARD 5 — RULES ---------- */
+.rules-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rules-list li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.rules-list li::before {
+  content: "✓";
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* ---------- CARD 6 — TARGET ---------- */
+.target-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#targetTextarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+  outline: none;
+  font-family: inherit;
+  line-height: 1.5;
+  flex: 1;
+  user-select: text;
+}
+
+#targetTextarea::placeholder {
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+#targetTextarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.char-counter {
+  text-align: right;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+  opacity: 0.7;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+/* Tablet: two columns */
+@media (max-width: 1024px) {
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: one column */
+@media (max-width: 640px) {
+  body {
+    padding: 1rem 0.6rem;
+  }
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  .app-header {
+    margin-bottom: 1.5rem;
+  }
+  .dashboard {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  .card {
+    padding: 1rem 0.8rem;
+  }
+  .timer-display {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+  .preset-btn {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.65rem;
+  }
+  .ctrl-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.6rem;
+    min-width: 50px;
+  }
+  .upload-preview img {
+    max-height: 140px;
+  }
+  .drag-handle {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .complete-btn {
+    font-size: 1rem;
+    padding: 1rem;
+    min-height: 60px;
+  }
+  .complete-btn .btn-icon {
+    font-size: 1.3rem;
+  }
+  .complete-message {
+    font-size: 1.1rem;
+  }
+  .confetti-particle {
+    font-size: 1.2rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 420px) {
+  .timer-controls {
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    flex: 1 0 40%;
+  }
+}

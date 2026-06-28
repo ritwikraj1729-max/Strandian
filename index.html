@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strandian — Deep Work Focus</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <h1>Strandian</h1>
+    <p class="subtitle">One Task. Zero Distractions.</p>
+  </header>
+
+  <!-- ===== DASHBOARD ===== -->
+  <main class="dashboard" id="dashboard">
+
+    <!-- CARD 1 — TASK -->
+    <section class="card card-task" draggable="true">
+      <span class="drag-handle">⠿</span>
+      <h2>Future Goal</h2>
+      <input
+        type="text"
+        id="taskInput"
+        placeholder="Why are you doing This?"
+        autocomplete="off"
+      />
+    </section>
+
+    <!-- CARD 2 — TIMER -->
+    <section class="card card-timer" draggable="true">
+      <span class="drag-handle">⠿</span>
+      <h2>Focus Timer</h2>
+      <div class="presets" id="presets">
+        <button class="preset-btn" data-minutes="30">30 min</button>
+        <button class="preset-btn" data-minutes="40">40 min</button>
+        <button class="preset-btn" data-minutes="50">50 min</button>
+        <button class="preset-btn" data-minutes="60">60 min</button>
+        <button class="preset-btn" data-minutes="70">70 min</button>
+        <button class="preset-btn" data-minutes="80">80 min</button>
+        <button class="preset-btn" data-minutes="90">90 min</button>
+      </div>
+      <div class="timer-display" id="timerDisplay">30:00</div>
+      <div class="timer-controls">
+        <button class="ctrl-btn" id="btnStart">Start</button>
+        <button class="ctrl-btn" id="btnPause">Pause</button>
+        <button class="ctrl-btn" id="btnResume">Resume</button>
+        <button class="ctrl-btn" id="btnReset">Reset</button>
+      </div>
+      <div class="session-complete hidden" id="sessionComplete">
+        Session Complete 🎉
+      </div>
+    </section>
+
+    <!-- CARD 3 — IMAGE UPLOAD -->
+    <section class="card card-image" draggable="true">
+      <span class="drag-handle">⠿</span>
+      <h2>Image Upload</h2>
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-placeholder" id="uploadPlaceholder">
+          <span class="upload-icon">📷</span>
+          <p>Upload Motivational Image</p>
+          <span class="upload-hint">Click or drag &amp; drop</span>
+        </div>
+        <div class="upload-preview hidden" id="uploadPreview">
+          <img id="previewImage" src="" alt="Reference image" />
+          <div class="upload-actions">
+            <button class="upload-btn replace-btn" id="replaceBtn">Replace</button>
+            <button class="upload-btn remove-btn" id="removeBtn">Remove</button>
+          </div>
+        </div>
+        <input
+          type="file"
+          id="fileInput"
+          accept="image/png,image/jpeg,image/webp"
+        />
+      </div>
+    </section>
+
+    <!-- CARD 4 — TASK COMPLETE (NEW) -->
+    <section class="card card-complete" draggable="true">
+      <span class="drag-handle">⠿</span>
+      <h2>Task Complete</h2>
+      <button class="complete-btn" id="completeBtn">
+        <span class="btn-icon">✅</span>
+        <span class="btn-text">Mark as Complete</span>
+      </button>
+      <div class="complete-message hidden" id="completeMessage">
+        🎉 Well Done! 🎉
+      </div>
+      <!-- Confetti container (particles injected here) -->
+      <div class="confetti-container" id="confettiContainer"></div>
+    </section>
+
+    <!-- CARD 5 — RULES -->
+    <section class="card card-rules" draggable="true">
+      <span class="drag-handle">⠿</span>
+      <h2>Rules</h2>
+      <ul class="rules-list">
+        <li>No task switching.</li>
+        <li>No distractions.</li>
+        <li>God Mode ON.</li>
+        <li>Complete the task before leaving.</li>
+        <li>Phone away.</li>
+        <li>Stay focused.</li>
+        <li>Quality over speed.</li>
+      </ul>
+    </section>
+
+    <!-- CARD 6 — TARGET -->
+    <section class="card card-target" draggable="true">
+      <span class="drag-handle">⠿</span>
+      <h2>Today's Target</h2>
+      <div class="target-wrapper">
+        <textarea
+          id="targetTextarea"
+          placeholder="Paste today's roadmap, instructions, notes, or goal…"
+          maxlength="3000"
+          spellcheck="true"
+        ></textarea>
+        <div class="char-counter">
+          <span id="charCount">0</span> / 3000
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
