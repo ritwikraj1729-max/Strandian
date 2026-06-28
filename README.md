@@ -204,12 +204,6 @@ Strandian/
 
 ## 🚀 Getting Started
 
-Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/strandian.git
-```
-
 Or simply download the project and open **index.html** in your browser.
 
 For development, you can use the **Live Server** extension in Visual Studio Code.
