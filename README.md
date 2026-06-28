@@ -2,21 +2,21 @@
 
 > **One Task. Zero Distractions.**
 
-Strandian is a minimal deep-work dashboard built for people who want to focus on **one task at a time**.
+**Strandian** is a lightweight, distraction-free focus dashboard designed to help you concentrate on a single task. Instead of overwhelming you with productivity metrics, accounts, or unnecessary features, Strandian provides only the essentials you need to stay focused.
 
-Unlike traditional productivity apps filled with streaks, XP, achievements, and notifications, Strandian removes everything unnecessary and leaves only the essentials for a distraction-free work session.
-
-Built entirely with **HTML, CSS, and Vanilla JavaScript**, Strandian runs completely in the browser with **no backend, no frameworks, and no data storage**.
+Everything runs directly in your browser using **HTML, CSS, and Vanilla JavaScript**—no frameworks, no backend, and no data storage.
 
 ---
 
 ## ✨ Features
 
-### 📝 Task Input
+### 🎯 Future Goal
 
-* Set your current task.
-* Clean single-line input.
-* Press **Enter** to finish editing.
+Start every focus session by reminding yourself **why you're doing the work**.
+
+Write your long-term goal, dream, or motivation to keep yourself focused throughout the session.
+
+---
 
 ### ⏱️ Focus Timer
 
@@ -36,15 +36,15 @@ Includes:
 * Pause
 * Resume
 * Reset
-* Completion notification
-* Soft Web Audio beep
-* Session completion message
+* Session completion notification
+* Soft notification beep
+* Completion message
 
 ---
 
-### 🖼️ Image Upload
+### 🖼️ Motivational Image
 
-Upload a reference image for your current work.
+Upload an image that motivates or inspires you during your work session.
 
 Supports:
 
@@ -59,44 +59,44 @@ Features:
 * Drag & Drop
 * Replace image
 * Remove image
-* Instant preview
+* Instant image preview
 
 ---
 
 ### ✅ Task Complete
 
-Celebrate finishing your work with a dedicated completion button.
+Celebrate completing your work.
 
-Includes:
+Features:
 
+* Completion button
 * Animated celebration
-* Confetti burst
+* Confetti effect
 * Success message
-* Premium button animation
 
 ---
 
-### 📋 Today's Target
+### 📝 Today's Target
 
-A distraction-free writing area for:
+A dedicated writing area for:
 
-* Goals
+* Daily goals
+* Study roadmap
 * Notes
 * Instructions
-* Roadmaps
-* Daily objectives
+* Work plan
 
 Includes:
 
-* Auto-resizing textarea
+* Auto-growing textarea
 * Live character counter
-* 3000-character limit
+* Maximum 3000 characters
 
 ---
 
-### 📖 Rules Panel
+### 📖 Rules
 
-Built-in deep work reminders:
+Stay disciplined with built-in focus rules:
 
 * No task switching
 * No distractions
@@ -108,47 +108,71 @@ Built-in deep work reminders:
 
 ---
 
-### 🎯 Drag & Drop Dashboard
+### 🖱️ Drag & Drop Dashboard
 
-Every card can be reordered using native drag-and-drop.
+Every card can be rearranged to match your preferred workspace.
 
-Simply drag a card using the handle and arrange your workspace however you like.
+Simply drag any card using its handle and organize your dashboard.
 
 ---
 
 ### ⌨️ Keyboard Shortcuts
 
-| Shortcut  | Action               |
-| --------- | -------------------- |
-| **Space** | Pause / Resume Timer |
-| **R**     | Reset Timer          |
-| **Enter** | Exit Task Input      |
+| Shortcut  | Action                     |
+| --------- | -------------------------- |
+| **Space** | Pause / Resume Timer       |
+| **R**     | Reset Timer                |
+| **Enter** | Finish editing Future Goal |
+
+---
+
+## 🚀 Lightweight by Design
+
+Strandian intentionally avoids unnecessary complexity.
+
+It does **not** include:
+
+* User accounts
+* Login system
+* Database
+* Cloud sync
+* Local Storage
+* Session Storage
+* Cookies
+* Analytics
+* Frameworks
+* External libraries
+
+Everything exists **only while the page is open**.
+
+Once you refresh or close the tab, the current session is cleared completely.
+
+---
+
+## ⚠️ Important
+
+Since Strandian does **not** save any information:
+
+* Keep the website open while your focus timer is running.
+* Do **not** refresh the page.
+* Closing the tab will end the current session.
+* Uploaded images, text, and timer progress will not be recovered.
+
+Strandian is designed to be a **temporary focus workspace**, not a note-taking or task management application.
 
 ---
 
 ## 🎨 Design Philosophy
 
-Strandian follows one simple principle:
+Modern productivity apps often include countless features that can become distractions themselves.
 
-> **Remove everything that doesn't help you focus.**
+Strandian follows a different philosophy:
 
-No:
+> **Focus on one goal, one timer, one target, and finish your work.**
 
-* XP
-* Streaks
-* Accounts
-* Notifications
-* Leaderboards
-* Social features
-* AI distractions
+Nothing more.
 
-Only:
-
-* One task
-* One timer
-* One reference image
-* One target
-* One goal
+Nothing less.
 
 ---
 
@@ -158,13 +182,11 @@ Only:
 * CSS3
 * Vanilla JavaScript (ES6)
 
-No frameworks.
-
-No libraries.
+No dependencies.
 
 No build tools.
 
-No backend.
+No frameworks.
 
 ---
 
@@ -182,27 +204,23 @@ Strandian/
 
 ## 🚀 Getting Started
 
-1. Clone the repository.
+Clone the repository:
 
 ```bash
 git clone https://github.com/yourusername/strandian.git
 ```
 
-2. Open the project folder.
+Or simply download the project and open **index.html** in your browser.
 
-3. Double-click `index.html`
+For development, you can use the **Live Server** extension in Visual Studio Code.
 
-or
-
-Open it using **Live Server** in Visual Studio Code.
-
-That's it—no installation or dependencies required.
+No installation is required.
 
 ---
 
-## 💻 Browser Support
+## 🌐 Browser Support
 
-Works in all modern browsers including:
+Works on all modern browsers:
 
 * Google Chrome
 * Microsoft Edge
@@ -212,38 +230,30 @@ Works in all modern browsers including:
 
 ---
 
-## 📌 Notes
+## 💡 Future Improvements
 
-* Everything runs locally in your browser.
-* No internet connection is required after loading the page.
-* No user data is stored.
-* Refreshing or closing the tab clears the current session.
+Possible future additions:
 
----
-
-## 🎯 Future Ideas
-
-Potential enhancements:
-
-* Light mode
-* Fullscreen focus mode
-* Custom timer durations
-* Ambient background sounds
-* Progress ring animation
-* Keyboard-only navigation
-* Export target notes
-* Optional session history
+* Fullscreen Focus Mode
+* Light Theme
+* Custom Timer Durations
+* Ambient Background Sounds
+* Progress Ring Around Timer
+* Improved Accessibility
+* Better Mobile Experience
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the **MIT License**.
+This project is licensed under the **MIT License**.
 
 ---
 
-## ❤️ Acknowledgements
+## ❤️ Final Thought
 
-Designed and developed as a minimalist productivity tool for focused work.
+Strandian isn't designed to make you *feel* productive.
 
-> **Focus on one thing. Finish it well.**
+It's designed to help you **be productive**.
+
+Open a tab, remember your future goal, set your timer, remove distractions, and focus until you're done.
