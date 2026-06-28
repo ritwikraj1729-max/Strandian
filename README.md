@@ -116,16 +116,6 @@ Simply drag any card using its handle and organize your dashboard.
 
 ---
 
-### ⌨️ Keyboard Shortcuts
-
-| Shortcut  | Action                     |
-| --------- | -------------------------- |
-| **Space** | Pause / Resume Timer       |
-| **R**     | Reset Timer                |
-| **Enter** | Finish editing Future Goal |
-
----
-
 ## 🚀 Lightweight by Design
 
 Strandian intentionally avoids unnecessary complexity.
